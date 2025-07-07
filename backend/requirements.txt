@@ -1,0 +1,6 @@
+# Backend requirements for Suffolk KB
+fastapi
+uvicorn[standard]
+jinja2
+python-multipart
+watchfiles

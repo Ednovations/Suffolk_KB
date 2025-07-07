@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Suffolk KB Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/admin.css">
+    <style>
+        body { background: #181c24; color: #fff; font-family: 'Segoe UI', Arial, sans-serif; }
+        .container { max-width: 900px; margin: 40px auto; background: #232837; border-radius: 12px; box-shadow: 0 0 24px #000a; padding: 32px; }
+        h1 { font-size: 2.2em; margin-bottom: 0.5em; }
+        textarea { width: 100%; min-height: 400px; background: #181c24; color: #fff; border: 1px solid #444; border-radius: 8px; padding: 12px; font-size: 1.1em; }
+        button { background: #2e7dff; color: #fff; border: none; border-radius: 8px; padding: 12px 32px; font-size: 1.1em; margin-top: 16px; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #1a4fa0; }
+        .info { margin: 1em 0; color: #7ecfff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Panel de Administración - Suffolk KB</h1>
+        <div class="info">Edita el JSON de la base de conocimiento y guarda para actualizar a todos los agentes en tiempo real.</div>
+        <form method="post" action="/admin/update">
+            <textarea name="content" id="kb-content">{{ kb | tojson(indent=2) }}</textarea>
+            <br>
+            <button type="submit">Guardar y Actualizar</button>
+        </form>
+    </div>
+    <script>
+        // Optional: Add JSON validation before submit
+        document.querySelector('form').addEventListener('submit', function(e) {
+            try {
+                JSON.parse(document.getElementById('kb-content').value);
+            } catch (err) {
+                alert('El JSON no es válido: ' + err.message);
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suffolk Knowledge Base</title>
+    <style>
+        :root {
+            --primary-color: #232946;
+            --secondary-color: #3e5c76;
+            --accent-color: #f43f5e;
+            --light-color: #f5f7fa;
+            --dark-color: #121629;
+            --success-color: #22c55e;
+            --warning-color: #f59e0b;
+            --neon-blue: #00eaff;
+            --neon-purple: #a259ff;
+            --neon-pink: #ff4ecd;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-color);
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Styles */
+        #sidebar {
+            background: linear-gradient(160deg, #10202b 80%, #112d2b 100%);
+            box-shadow: 2px 0 24px 0 #000a, 0 0 0 1.5px #38bdf8, 0 0 12px 2px #22c55e44;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            z-index: 10;
+            overflow-y: auto;
+            transition: box-shadow 0.2s;
+        }
+        
+        #sidebar h2 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #e0f7fa;
+            text-shadow: 0 0 8px #38bdf8, 0 0 2px #22c55e88;
+            border-bottom: none;
+            margin-bottom: 18px;
+        }
+        
+        .star-of-david {
+            width: 54px;
+            height: 54px;
+            display: inline-block;
+        }
+        
+        .star-of-david svg polygon, .star-of-david svg polyline {
+            stroke: #00eaff;
+            filter: drop-shadow(0 0 6px #38bdf888);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a, .menu-toggle {
+            color: #b6faff;
+            background: transparent;
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active, .menu-toggle.active {
+            background: #153e52;
+            color: #e0fff7;
+            box-shadow: 0 0 0 2px #38bdf888, 0 0 12px 2px #22c55e44;
+            border-left: 3px solid #00eaff;
+        }
+        
+        .sidebar-submenu {
+            list-style: none;
+            padding-left: 20px;
+            display: none;
+        }
+        
+        .sidebar-submenu.show {
+            display: block;
+        }
+        
+        .sidebar-submenu a {
+            color: #a7f3d0;
+            padding: 8px 20px 8px 15px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .menu-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 20px;
+            color: var(--light-color);
+        }
+        
+        .menu-toggle::after {
+            content: "▾";
+            transition: transform 0.3s;
+        }
+        
+        .menu-toggle.active::after {
+            transform: rotate(180deg);
+        }
+        
+        /* Main Content Styles */
+        #main-content {
+            padding: 0 40px 40px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .section {
+            background: linear-gradient(120deg, #10202b 60%, #153e52 100%);
+            border: 1.5px solid #38bdf8;
+            box-shadow: 0 4px 32px 0 #10202bcc, 0 0 0 1.5px #38bdf8, 0 0 16px 2px #22c55e33;
+            color: #e0f7fa;
+            border-radius: 16px;
+            margin-bottom: 32px;
+            padding: 32px 28px 28px 28px;
+            max-width: 1400px;
+            width: 98vw;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #e0f7fa;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+        
+        h3 {
+            font-size: 1.15rem;
+            margin-top: 25px;
+            margin-bottom: 8px;
+        }
+        
+        /* Resalta las categorías (h2) y subcategorías (h3, h4) de forma suave y moderna */
+        .section h2 {
+            background: linear-gradient(90deg, #153e52 60%, #1a1026 100%);
+            color: #b6faff;
+            border-radius: 10px;
+            padding: 10px 22px 10px 18px;
+            margin-bottom: 18px;
+            font-size: 1.45rem;
+            box-shadow: 0 2px 12px 0 #153e5233;
+            letter-spacing: 0.02em;
+        }
+        .section h3 {
+            background: linear-gradient(90deg, #112d2b 60%, #153e52 100%);
+            color: #7ee7e7;
+            border-radius: 8px;
+            padding: 7px 16px 7px 14px;
+            margin-top: 22px;
+            margin-bottom: 10px;
+            font-size: 1.13rem;
+            font-weight: 600;
+            box-shadow: 0 1px 8px 0 #153e521a;
+        }
+        .section h4 {
+            background: linear-gradient(90deg, #153e52 60%, #112d2b 100%);
+            color: #38bdf8;
+            border-radius: 7px;
+            padding: 5px 12px 5px 12px;
+            margin-top: 16px;
+            margin-bottom: 7px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            box-shadow: 0 1px 6px 0 #153e5212;
+        }
+        
+        .step, .note, .warning, .success {
+            background: #153e52;
+            color: #e0f7fa;
+            border-left: 4px solid #00eaff;
+        }
+        
+        .note {
+            background: #153e52;
+            border-left: 4px solid #38bdf8;
+            color: #e0f7fa;
+            margin-bottom: 16px;
+            padding: 14px 18px;
+            border-radius: 8px;
+        }
+        .warning {
+            background: #153e52;
+            border-left: 4px solid #0ea5e9;
+            color: #e0f7fa;
+            margin-bottom: 16px;
+            padding: 14px 18px;
+            border-radius: 8px;
+        }
+        .success {
+            background: #153e52;
+            border-left: 4px solid #22c55e;
+            color: #e0f7fa;
+            margin-bottom: 16px;
+            padding: 14px 18px;
+            border-radius: 8px;
+        }
+        
+        table {
+            background: #10202b;
+            color: #e0f7fa;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px 0 #10202baa;
+        }
+        
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+        }
+        
+        th {
+            background: #153e52;
+            color: #00eaff;
+            border-bottom: 2px solid #38bdf8;
+        }
+        
+        td {
+            background: #10202b;
+            border-bottom: 1px solid #38bdf8;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover td {
+            background: #153e52;
+            color: #e0fff7;
+        }
+        
+        /* Updates Section */
+        .updates-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .update-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .update-item:last-child {
+            border-bottom: none;
+        }
+        
+        .update-date {
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .update-content {
+            margin-left: 20px;
+        }
+        
+        /* Search Box */
+        #search-box {
+            width: calc(100% - 30px);
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin: 0 15px 20px 15px;
+            box-sizing: border-box;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .tab-content {
+                width: 100vw;
+                margin-left: -8vw;
+                margin-right: -8vw;
+                padding-left: 4vw;
+                padding-right: 4vw;
+            }
+            th, td {
+                padding: 10px 6px;
+                font-size: 0.97rem;
+            }
+            .section {
+                width: 100vw;
+                max-width: 100vw;
+                margin-left: -8vw;
+                margin-right: -8vw;
+                padding-left: 4vw;
+                padding-right: 4vw;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            body {
+                grid-template-columns: 1fr;
+            }
+            #sidebar {
+                height: auto;
+                position: relative;
+            }
+            #main-content {
+                padding: 0 10px 20px 10px;
+            }
+        }
+        
+        .liquid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -9;
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            pointer-events: none;
+            user-select: none;
+            background: 
+                radial-gradient(ellipse at 60% 15%, #38bdf8cc 0%, #1a1026 60%),
+                radial-gradient(ellipse at 20% 80%, #00eaff99 0%, #1a102600 60%),
+                radial-gradient(ellipse at 80% 80%, #22c55e66 0%, #1a102600 60%),
+                linear-gradient(120deg, #1a1026 0%, #0e2236 100%);
+            opacity: 0.98;
+            animation: dune-aurora-move 22s linear infinite alternate;
+        }
+        @keyframes dune-aurora-move {
+            0% { filter: blur(0px) brightness(1.1) saturate(1.2); }
+            100% { filter: blur(3px) brightness(1.15) saturate(1.3); }
+        }
+        .aurora {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: -8;
+            overflow: hidden;
+        }
+        .aurora span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            mix-blend-mode: lighten;
+            animation: dune-aurora-float 28s ease-in-out infinite alternate;
+        }
+        .aurora .a1 { left: 8vw; top: 12vh; width: 420px; height: 320px; background: linear-gradient(135deg, #38bdf8 0%, #00eaff 100%); animation-delay: 0s; }
+        .aurora .a2 { left: 65vw; top: 18vh; width: 540px; height: 370px; background: linear-gradient(120deg, #00eaff 0%, #22c55e 100%); animation-delay: 5s; }
+        .aurora .a3 { left: 28vw; top: 65vh; width: 370px; height: 270px; background: linear-gradient(120deg, #38bdf8 0%, #0ea5e9 100%); animation-delay: 10s; }
+        .aurora .a4 { left: 82vw; top: 75vh; width: 320px; height: 220px; background: linear-gradient(120deg, #22c55e 0%, #38bdf8 100%); animation-delay: 14s; }
+        .aurora .a5 { left: 48vw; top: 85vh; width: 420px; height: 320px; background: linear-gradient(120deg, #0ea5e9 0%, #2dd4bf 100%); animation-delay: 18s; }
+        @keyframes dune-aurora-float {
+            0% { transform: translateY(0) scale(1); opacity: 0.6; }
+            100% { transform: translateY(-60px) scale(1.12); opacity: 0.85; }
+        }
+
+        /* Quitar highlight de los pasos principales (step) y dejarlo solo en .note, .warning, .success */
+        .step {
+            background: transparent !important;
+            color: #e0f7fa;
+            border-left: none !important;
+            box-shadow: none !important;
+            margin-bottom: 18px;
+            padding: 16px 18px;
+            font-size: 1.13rem;
+        }
+        .step .step-number {
+            color: #00eaff;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora">
+        <span class="a1"></span>
+        <span class="a2"></span>
+        <span class="a3"></span>
+        <span class="a4"></span>
+        <span class="a5"></span>
+    </div>
+    <!-- Sidebar Navigation -->
+    <div id="sidebar">
+        <h2>
+            <span class="star-of-david" style="width:54px;height:54px;min-width:54px;min-height:54px;">
+                <svg viewBox="0 0 54 54">
+                    <polygon points="27,8 47,46 7,46" stroke="#ff4ecd" stroke-width="3.2" fill="none"/>
+                    <polygon points="27,46 7,16 47,16" stroke="#fff176" stroke-width="3.2" fill="none"/>
+                </svg>
+            </span>
+            Suffolk Primary Health
+        </h2>
+        <input type="text" id="search-box" placeholder="Search...">
+        <ul class="sidebar-menu">
+            <li><a href="#call-flow" class="active">Call Flow</a></li>
+            <li><a href="#new-patient">New Patient</a></li>
+            <li><a href="#schedule-appointment">Schedule Appointment</a></li>
+            <li><a href="#cancel-appointment">Cancel Appointment</a></li>
+            <li><a href="#confirm-appointment">Confirm Appointment</a></li>
+            <li><a href="#medication-requests">Medication Requests</a></li>
+            <li><a href="#third-party-requests">Third Party Requests</a></li>
+            <li><a href="#sick-and-pain">Sick and Pain</a></li>
+            <li><a href="#information">Information</a></li>
+            <li><a href="#ecw">ECW (eClinicalWorks)</a></li>
+            <li><a href="#staff-extensions">Staff Extensions</a></li>
+            <li><a href="#key-notes">Key Notes</a></li>
+            <li><a href="#insurance-portals">Insurance Portals</a></li>
+            <li><a href="#appointment-guide">Appointment Guide</a></li>
+            <li><a href="#weekly-updates">Weekly Updates</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <h1>Suffolk Knowledge Base</h1>
+        
+        <div class="section" id="call-flow">
+            <h2>Call Flow Procedures</h2>
+            <p>This document provides standardized procedures for handling different types of calls. Follow these steps to ensure consistent and efficient call handling.</p>
+        </div>
+        
+        <!-- New Patient Section -->
+        <div class="section" id="new-patient">
+            <h2>New Patient Process</h2>
+            <div id="np-steps-container"></div>
+        </div>
+        <!-- Schedule Appointment Section -->
+        <div class="section" id="schedule-appointment">
+            <h2>Schedule Appointment Process</h2>
+            <div id="schedule-steps-container"></div>
+        </div>
+        <!-- Cancel Appointment Section -->
+        <div class="section" id="cancel-appointment">
+            <h2>Cancel Appointment Process</h2>
+            <div id="cancel-steps-container"></div>
+        </div>
+        <!-- Confirm Appointment Section -->
+        <div class="section" id="confirm-appointment">
+            <h2>Confirm Appointment Process</h2>
+            <div id="confirm-steps-container"></div>
+        </div>
+        
+        <!-- Medication Requests Section -->
+        <div class="section" id="medication-requests">
+            <h2>Medication Requests</h2>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="med-refill">Refill Requests</div>
+                <div class="tab" data-tab="med-no-refill">No Refill Available</div>
+                <div class="tab" data-tab="med-not-arrived">Medication Not Arrived</div>
+            </div>
+            
+            <div id="med-refill" class="tab-content active">
+                <h3>If Patient is requesting a refill</h3>
+                <div id="med-refill-container"></div>
+            </div>
+            
+            <div id="med-no-refill" class="tab-content">
+                <h3>If medication is not on the refill list</h3>
+                <div id="med-no-refill-container"></div>
+            </div>
+            
+            <div id="med-not-arrived" class="tab-content">
+                <h3>If the medication didn't arrive to the pharmacy</h3>
+                <div id="med-not-arrived-container"></div>
+            </div>
+        </div>
+        
+        <!-- Third Party Requests Section -->
+        <div class="section" id="third-party-requests">
+            <h2>Third Party Requests</h2>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="medical-records">Medical Records</div>
+                <div class="tab" data-tab="medical-notes">Medical Notes</div>
+                <div class="tab" data-tab="other-documents">Other Documents</div>
+            </div>
+            
+            <div id="medical-records" class="tab-content active">
+                <h3>If the request is for medical records</h3>
+                <div id="medical-records-container"></div>
+            </div>
+            
+            <div id="medical-notes" class="tab-content">
+                <h3>If the request is for a medical note</h3>
+                <div id="medical-notes-container"></div>
+            </div>
+            
+            <div id="other-documents" class="tab-content">
+                <h3>If the request is for any other type of document</h3>
+                <div id="other-documents-container"></div>
+            </div>
+        </div>
+        
+        <!-- Sick and Pain Section -->
+        <div class="section" id="sick-and-pain">
+            <h2>Sick and Pain Visits</h2>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="sick-pain-questions">Questions</div>
+                <div class="tab" data-tab="sick-pain-process">Process</div>
+                <div class="tab" data-tab="hospital-followup">Hospital Follow-Up</div>
+            </div>
+            
+            <div id="sick-pain-questions" class="tab-content active">
+                <h3>Identifying Sick or Pain Symptoms</h3>
+                <div id="sick-pain-questions-container"></div>
+            </div>
+            
+            <div id="sick-pain-process" class="tab-content">
+                <h3>If the patient is sick or in pain</h3>
+                <div id="sick-pain-process-container"></div>
+            </div>
+            
+            <div id="hospital-followup" class="tab-content">
+                <h3>Hospital Follow-Up</h3>
+                <div id="hospital-followup-container"></div>
+            </div>
+        </div>
+        
+        <!-- Information Section -->
+        <div class="section" id="information">
+            <h2>General Information</h2>
+            <div id="locations-container"></div>
+        </div>
+        <!-- ECW Section -->
+        <div class="section" id="ecw">
+            <h2>ECW (eClinicalWorks) Workflows</h2>
+            <div id="ecw-general-tips"></div>
+            <h3>Adding New Patient</h3>
+            <div id="ecw-adding-new-patient"></div>
+            <h3>Scheduling Appointment</h3>
+            <div id="ecw-scheduling-appointment"></div>
+            <h3>Cancelling/Rescheduling</h3>
+            <div id="ecw-cancelling-rescheduling"></div>
+            <h3>Sending Labs</h3>
+            <div id="ecw-sending-labs"></div>
+            <h3>Sending Fax</h3>
+            <div id="ecw-sending-fax"></div>
+            <h3>Viewing Insurance</h3>
+            <div id="ecw-viewing-insurance"></div>
+            <h3>Viewing Prescriptions</h3>
+            <div id="ecw-viewing-prescriptions"></div>
+            <h3>Sending TeleEncounter</h3>
+            <div id="ecw-sending-teleencounter"></div>
+            <h3>Uploading Documents</h3>
+            <div id="ecw-uploading-documents"></div>
+            <h3>Common Scenarios</h3>
+            <div id="ecw-common-scenarios"></div>
+            <h3>Navigation Shortcuts</h3>
+            <div id="ecw-navigation-shortcuts"></div>
+        </div>
+        
+        <!-- Staff Extensions Section -->
+        <div class="section" id="staff-extensions">
+            <h2>Staff Extensions</h2>
+            <table id="staff-extensions-table">
+                <thead>
+                    <tr>
+                        <th>Staff</th>
+                        <th>Extension</th>
+                        <th>Department/Responsibilities</th>
+                    </tr>
+                </thead>
+                <tbody id="staff-extensions-body"></tbody>
+            </table>
+        </div>
+        
+        <!-- Key Notes Section -->
+        <div class="section" id="key-notes">
+            <h2>Key Notes</h2>
+            <div id="key-notes-container"></div>
+        </div>
+        
+        <!-- Insurance Portals Section -->
+        <div class="section" id="insurance-portals">
+            <h2>Insurance Portals</h2>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="accepted-insurances">Accepted Insurances</div>
+                <div class="tab" data-tab="pending-verification">Pending Verification</div>
+                <div class="tab" data-tab="not-accepted">Not Accepted</div>
+                <div class="tab" data-tab="special-notes">Special Notes</div>
+            </div>
+            
+            <div id="accepted-insurances" class="tab-content active">
+                <h3>Accepted Insurances</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Insurance Name</th>
+                            <th>Portal Name</th>
+                            <th>Website</th>
+                            <th>PCP Change Required</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="accepted-insurances-body"></tbody>
+                </table>
+            </div>
+            
+            <div id="pending-verification" class="tab-content">
+                <h3>Pending Verification</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Insurance Name</th>
+                            <th>Portal Name</th>
+                            <th>Website</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pending-verification-body"></tbody>
+                </table>
+            </div>
+            
+            <div id="not-accepted" class="tab-content">
+                <h3>Not Accepted Insurances</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Insurance Name</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody id="not-accepted-body"></tbody>
+                </table>
+            </div>
+            
+            <div id="special-notes" class="tab-content">
+                <h3>Special Notes</h3>
+                <div id="special-notes-container"></div>
+            </div>
+        </div>
+        
+        <!-- Appointment Guide Section -->
+        <div class="section" id="appointment-guide">
+            <h2>Appointment Guide</h2>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="visit-types">Visit Types</div>
+                <div class="tab" data-tab="sonograms">Sonograms</div>
+                <div class="tab" data-tab="visit-statuses">Visit Statuses</div>
+            </div>
+            
+            <div id="visit-types" class="tab-content active">
+                <h3>Visit Types</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Visit Type</th>
+                            <th>Description</th>
+                            <th>Duration</th>
+                            <th>Extra Info</th>
+                            <th>Rules</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visit-types-body"></tbody>
+                </table>
+            </div>
+            
+            <div id="sonograms" class="tab-content">
+                <h3>Sonograms</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Duration</th>
+                            <th>Preparation</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sonograms-body"></tbody>
+                </table>
+            </div>
+            
+            <div id="visit-statuses" class="tab-content">
+                <h3>Visit Statuses</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Description</th>
+                            <th>Notes</th>
+                            <th>Form</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visit-statuses-body"></tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Weekly Updates Section -->
+        <div class="section" id="weekly-updates">
+            <h2>Weekly Updates</h2>
+            <div class="updates-container" id="weekly-updates-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // Function to fetch JSON data
+        async function loadData() {
+            try {
+                // Intenta primero cargar Suffolk_kb_json.json
+                let response = await fetch('Suffolk_kb_json.json');
+                if (!response.ok) {
+                    // Si falla, intenta data.json
+                    response = await fetch('data.json');
+                    if (!response.ok) throw new Error('No se pudo cargar ningún archivo de datos');
+                }
+                const callFlowData = await response.json();
+                initializePage(callFlowData);
+            } catch (error) {
+                console.error('Error loading JSON data:', error);
+                // Fallback a datos vacíos si todo falla
+                initializePage({
+                    CallFlow: {
+                        NewPatient: { steps: ["Error loading data. Please check your JSON file."] },
+                        ScheduleAppointment: { steps: [] },
+                        CancelAppointment: { steps: [] },
+                        ConfirmAppointment: { steps: [] },
+                        MedicationRequests: { steps: {} },
+                        ThirdPartyRequests: {},
+                        SickAndPain: {},
+                        Information: {},
+                        ECW: {},
+                        StaffExtensions: [],
+                        KeyNotes: {},
+                        InsurancePortals: {},
+                        AppointmentGuide: {},
+                        WeeklyUpdates: {}
+                    }
+                });
+            }
+        }
+
+        // Function to render steps
+        function renderSteps(containerId, steps) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (!steps || !Array.isArray(steps)) {
+                container.innerHTML = '<div class="warning">No steps data available</div>';
+                return;
+            }
+            
+            steps.forEach((step, index) => {
+                const stepElement = document.createElement('div');
+                stepElement.className = 'step';
+                stepElement.style.marginBottom = '18px'; // Espacio entre instrucciones
+                stepElement.style.padding = '16px 18px'; // Más padding para legibilidad
+                stepElement.style.fontSize = '1.13rem'; // Letra un poco más grande
+                stepElement.innerHTML = `<span class="step-number" style="font-weight:bold;color:#00eaff;margin-right:10px;">${index + 1}.</span> ${step}`;
+                container.appendChild(stepElement);
+            });
+        }
+
+        // Function to render list items
+        function renderListItems(containerId, items) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (!items || !Array.isArray(items)) {
+                container.innerHTML = '<div class="warning">No list data available</div>';
+                return;
+            }
+            
+            const list = document.createElement('ul');
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+            container.appendChild(list);
+        }
+
+        // Function to render table rows
+        function renderTableRows(containerId, data, columns) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (!data || !Array.isArray(data)) {
+                container.innerHTML = '<div class="warning">No table data available</div>';
+                return;
+            }
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                
+                columns.forEach(col => {
+                    const cell = document.createElement('td');
+                    if (col === 'pcp_change_required') {
+                        cell.textContent = item[col] ? 'Yes' : 'No';
+                    } else {
+                        cell.textContent = item[col] || '';
+                    }
+                    row.appendChild(cell);
+                });
+                
+                container.appendChild(row);
+            });
+        }
+
+        // Function to render key notes
+        function renderKeyNotes(containerId, notes) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (!notes || typeof notes !== 'object') {
+                container.innerHTML = '<div class="warning">No key notes available</div>';
+                return;
+            }
+            
+            for (const [key, value] of Object.entries(notes)) {
+                if (typeof value === 'object') {
+                    const subheading = document.createElement('h3');
+                    subheading.textContent = key;
+                    container.appendChild(subheading);
+                    
+                    for (const [subkey, subvalue] of Object.entries(value)) {
+                        const noteElement = document.createElement('div');
+                        noteElement.className = 'note';
+                        noteElement.innerHTML = `<strong>${subkey}:</strong> ${subvalue}`;
+                        container.appendChild(noteElement);
+                    }
+                } else {
+                    const noteElement = document.createElement('div');
+                    noteElement.className = 'note';
+                    noteElement.innerHTML = `<strong>${key}:</strong> ${value}`;
+                    container.appendChild(noteElement);
+                }
+            }
+        }
+
+        // Function to render weekly updates
+        function renderWeeklyUpdates(containerId, updates) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (!updates || typeof updates !== 'object') {
+                container.innerHTML = '<div class="warning">No updates available</div>';
+                return;
+            }
+            
+            for (const [date, items] of Object.entries(updates)) {
+                const updateItem = document.createElement('div');
+                updateItem.className = 'update-item';
+                
+                const dateElement = document.createElement('div');
+                dateElement.className = 'update-date';
+                dateElement.textContent = date;
+                updateItem.appendChild(dateElement);
+                
+                const contentElement = document.createElement('div');
+                contentElement.className = 'update-content';
+                
+                if (Array.isArray(items)) {
+                    const list = document.createElement('ul');
+                    items.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        list.appendChild(li);
+                    });
+                    contentElement.appendChild(list);
+                } else {
+                    contentElement.textContent = 'No update items';
+                }
+                
+                updateItem.appendChild(contentElement);
+                container.appendChild(updateItem);
+            }
+        }
+
+        // Function to initialize the page with data
+        function initializePage(callFlowData) {
+            if (!callFlowData?.CallFlow) {
+                console.error('Invalid data structure');
+                return;
+            }
+
+            // New Patient
+            renderSteps('np-steps-container', callFlowData.CallFlow.NewPatient?.steps);
+            
+            // Schedule Appointment
+            renderSteps('schedule-steps-container', callFlowData.CallFlow.ScheduleAppointment?.steps);
+            
+            // Cancel Appointment
+            renderSteps('cancel-steps-container', callFlowData.CallFlow.CancelAppointment?.steps);
+            
+            // Confirm Appointment
+            renderSteps('confirm-steps-container', callFlowData.CallFlow.ConfirmAppointment?.steps);
+            
+            // Medication Requests
+            if (callFlowData.CallFlow.MedicationRequests?.steps) {
+                renderSteps('med-refill-container', callFlowData.CallFlow.MedicationRequests.steps['If Patient is requesting a refill']);
+                renderSteps('med-no-refill-container', callFlowData.CallFlow.MedicationRequests.steps['If medication is not on the refill list']);
+                renderSteps('med-not-arrived-container', callFlowData.CallFlow.MedicationRequests.steps["If the medication didn't arrive to the pharmacy"]);
+            }
+            
+            // Third Party Requests
+            if (callFlowData.CallFlow.ThirdPartyRequests) {
+                renderSteps('medical-records-container', callFlowData.CallFlow.ThirdPartyRequests['MedicalRecords']);
+                renderSteps('medical-notes-container', callFlowData.CallFlow.ThirdPartyRequests['MedicalNotes']);
+                renderSteps('other-documents-container', callFlowData.CallFlow.ThirdPartyRequests['OtherDocuments']);
+            }
+            
+            // Sick and Pain
+            if (callFlowData.CallFlow.SickAndPain) {
+                renderListItems('sick-pain-questions-container', callFlowData.CallFlow.SickAndPain['IdentifyingSymptoms']);
+                renderSteps('sick-pain-process-container', callFlowData.CallFlow.SickAndPain['Process']);
+                renderListItems('hospital-followup-container', callFlowData.CallFlow.SickAndPain['HospitalFollowUp']);
+                
+                // Information
+                if (callFlowData.CallFlow.Information?.General?.locations) {
+                    renderListItems('locations-container', callFlowData.CallFlow.Information.General.locations);
+                }
+                // Weekly Updates
+                if (callFlowData.CallFlow.Information?.weekly_updates) {
+                    renderWeeklyUpdates('weekly-updates-container', callFlowData.CallFlow.Information.weekly_updates);
+                }
+            }
+            
+            // ECW Section
+            if (callFlowData.CallFlow.ECW) {
+                renderListItems('ecw-general-tips', callFlowData.CallFlow.ECW.GeneralTips);
+                renderListItems('ecw-adding-new-patient', callFlowData.CallFlow.ECW.AddingNewPatient);
+                renderListItems('ecw-scheduling-appointment', callFlowData.CallFlow.ECW.SchedulingAppointment);
+                renderListItems('ecw-cancelling-rescheduling', callFlowData.CallFlow.ECW.CancellingRescheduling);
+                renderListItems('ecw-sending-labs', callFlowData.CallFlow.ECW.SendingLabs);
+                renderListItems('ecw-sending-fax', callFlowData.CallFlow.ECW.SendingFax);
+                renderListItems('ecw-viewing-insurance', callFlowData.CallFlow.ECW.ViewingInsurance);
+                renderListItems('ecw-viewing-prescriptions', callFlowData.CallFlow.ECW.ViewingPrescriptions);
+                renderListItems('ecw-sending-teleencounter', callFlowData.CallFlow.ECW.SendingTeleEncounter);
+                renderListItems('ecw-uploading-documents', callFlowData.CallFlow.ECW.UploadingDocuments);
+                // Common Scenarios
+                if (callFlowData.CallFlow.ECW.CommonScenarios) {
+                    const container = document.getElementById('ecw-common-scenarios');
+                    container.innerHTML = '';
+                    for (const [scenario, steps] of Object.entries(callFlowData.CallFlow.ECW.CommonScenarios)) {
+                        const subheading = document.createElement('h4');
+                        subheading.textContent = scenario;
+                        container.appendChild(subheading);
+                        if (Array.isArray(steps)) {
+                            const ul = document.createElement('ul');
+                            steps.forEach(step => {
+                                const li = document.createElement('li');
+                                li.textContent = step;
+                                ul.appendChild(li);
+                            });
+                            container.appendChild(ul);
+                        }
+                    }
+                }
+                renderListItems('ecw-navigation-shortcuts', callFlowData.CallFlow.ECW.NavigationShortcuts);
+            }
+            
+            // Staff Extensions
+            if (callFlowData.CallFlow.StaffExtensions) {
+                renderTableRows('staff-extensions-body', callFlowData.CallFlow.StaffExtensions, ['Staff', 'Ext', 'Department']);
+            }
+            
+            // Key Notes
+            if (callFlowData.CallFlow.KeyNotes) {
+                renderKeyNotes('key-notes-container', callFlowData.CallFlow.KeyNotes);
+            }
+            
+            // Insurance Portals
+            if (callFlowData.CallFlow.InsurancePortals) {
+                if (callFlowData.CallFlow.InsurancePortals.accepted_insurances) {
+                    renderTableRows('accepted-insurances-body', callFlowData.CallFlow.InsurancePortals.accepted_insurances, 
+                        ['insurance_name', 'portal_name', 'website', 'pcp_change_required', 'notes']);
+                }
+                
+                if (callFlowData.CallFlow.InsurancePortals.pending_verification) {
+                    renderTableRows('pending-verification-body', callFlowData.CallFlow.InsurancePortals.pending_verification, 
+                        ['insurance_name', 'portal_name', 'website', 'status']);
+                }
+                
+                if (callFlowData.CallFlow.InsurancePortals.not_accepted) {
+                    renderTableRows('not-accepted-body', callFlowData.CallFlow.InsurancePortals.not_accepted, 
+                        ['insurance_name', 'reason']);
+                }
+                
+                const specialNotesContainer = document.getElementById('special-notes-container');
+                if (specialNotesContainer && callFlowData.CallFlow.InsurancePortals.special_notes) {
+                    specialNotesContainer.innerHTML = '';
+                    for (const [key, value] of Object.entries(callFlowData.CallFlow.InsurancePortals.special_notes)) {
+                        if (key !== 'metadata') {
+                            const noteElement = document.createElement('div');
+                            noteElement.className = 'note';
+                            noteElement.innerHTML = `<strong>${key}:</strong> ${value}`;
+                            specialNotesContainer.appendChild(noteElement);
+                        }
+                    }
+                }
+            }
+            
+            // Appointment Guide
+            if (callFlowData.CallFlow.AppointmentGuide) {
+                if (callFlowData.CallFlow.AppointmentGuide.visit_types) {
+                    renderTableRows('visit-types-body', callFlowData.CallFlow.AppointmentGuide.visit_types, 
+                        ['visit_type', 'description', 'duration', 'extra_info', 'rules']);
+                }
+                
+                if (callFlowData.CallFlow.AppointmentGuide.sonograms) {
+                    renderTableRows('sonograms-body', callFlowData.CallFlow.AppointmentGuide.sonograms, 
+                        ['type', 'description', 'duration', 'preparation', 'notes']);
+                }
+                
+                if (callFlowData.CallFlow.AppointmentGuide.visit_statuses) {
+                    renderTableRows('visit-statuses-body', callFlowData.CallFlow.AppointmentGuide.visit_statuses, 
+                        ['status', 'description', 'notes', 'form']);
+                }
+            }
+
+            // Set up tab functionality
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and tab contents
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Set up sidebar menu toggle functionality
+            document.querySelectorAll('.menu-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const submenu = this.nextElementSibling;
+                    submenu.classList.toggle('show');
+                });
+            });
+            
+            // Set up smooth scrolling for sidebar links
+            document.querySelectorAll('#sidebar a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all sidebar links
+                    document.querySelectorAll('#sidebar a').forEach(a => a.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Scroll to the target section
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Set up search functionality
+            document.getElementById('search-box').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                if (searchTerm.length < 2) {
+                    // Show all sections if search term is too short
+                    document.querySelectorAll('.section').forEach(section => {
+                        section.style.display = 'block';
+                    });
+                    return;
+                }
+                
+                // Hide all sections initially
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show sections that contain the search term
+                document.querySelectorAll('.section').forEach(section => {
+                    const sectionText = section.textContent.toLowerCase();
+                    if (sectionText.includes(searchTerm)) {
+                        section.style.display = 'block';
+                    }
+                });
+            });
+        }
+
+        // Start the process when DOM is loaded
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>

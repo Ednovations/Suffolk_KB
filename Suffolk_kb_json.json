@@ -1,0 +1,1060 @@
+{
+  "WelcomeMessage": "Welcome to the Suffolk Primary Health Family! 🌟",
+  "CallFlow": {
+    "NewPatient": {
+      "steps": [
+        "Ask for insurance ID and check eligibility via portals (Availity, ePACES, UHC, Fidelis), check InsurancePortals tab in this Document",
+        "Go to the insurance portals and check the eligibility of the patient",
+        "If the patient is not eligible, due to insurance inactive no insurance, or SUFFOLK not accepted insurance (see InsurancePortals tab in this Document)",
+        "Inform the patient that, He/she is to pay for the appointment provide cost in SelfPayPricing tab in this Document",
+        "If the patient is eligible, and has one of our PCP's (Simon/Ilan), Proceed to the next step",
+        "If the patient is eligible but has a different PCP",
+        "Inform the patient to call insurance to change their PCP to Simon/Ilan (see InsurancePortals tab in this Document)",
+        "The insurance will provide a confirmation number to PT, at that moment PT can take it to the appointment or call us to provide it",
+        "Go to ECW and create a new patient profile (ADD) the patient's demographics, and follow along ECW prompts",
+        "Remember that, all new patients must be seen by a Dr as NP Annual Visit (NPANNVISIT) in ECW",
+        "Visit Status (PENDING or PCP(CHANGE)",
+        "Schedule the appointment in ECW for the NP Annual Visit (NPANNVISIT)",
+        "If the patient is underage, inform them that a legal guardian must be present for all visits",
+        "Leave notes in ECW General Notes"
+      ]
+    },
+    "ScheduleAppointment": {
+      "steps": [
+        "Search for the patient using their name or DOB.",
+        "Confirm the reason for the appointment (regular, sick, follow-up, etc.).",
+        "Check provider and facility availability (Hempstead or Riverhead).",
+        "Select the correct visit type and duration from the Appointment Guide.",
+        "Ask all required 'Line Up' questions and confirm details with the patient.",
+        "Schedule the appointment and send an SMS confirmation if possible.",
+        "Document the appointment details in 'General Notes'."
+      ]
+    },
+    "CancelAppointment": {
+      "steps": [
+        "Find the appointment in ECW using the patient's date of birth and name",
+        "Suggest to reschedule the appointment for a later date",
+        "Go to ECW, and from the visit status dropdown, select CANCEL(PHONECAN) or R/S (RESCHEDULE)",
+        "Leave notes in ECW General Notes",
+        "Record in Cancellation Reason.xlsx (date, reason, staff initials)"
+      ]
+    },
+    "ConfirmAppointment": {
+      "steps": [
+        "Find the appointment in ECW using the patient's date of birth and name",
+        "If there's no appointment, suggest to schedule one otherwise, confirm the information with the patient",
+        "If the appointment is found please confirm the following information with the patient:",
+        "Scheduled appointment date, time, type of visit, and location",
+        "Go to ECW, and from the visit status dropdown, confirm the appointment CONFIRM(VOICE)",
+        "Leave notes in ECW General Notes"
+      ]
+    },
+    "MedicationRequests": {
+      "steps": {
+        "If Patient is requesting a refill": [
+          "Leave notes in ECW General Notes"
+        ],
+        "If medication is not on the refill list": [
+          "Leave notes in ECW General Notes"
+        ],
+        "If the medication didn't arrive to the pharmacy": []
+      },
+      "Notes": [
+        "Always verify the patient's identity (full name, DOB) before accessing or sharing information.",
+        "Remember that, we cannot book an appointment with from a patient that has been hospitalized due to a car accident, work-related accident, or any other type of accident nor pregnancy-related issues.",
+        "Always check TEAMS for the latest updates and protocols before scheduling an appointment.",
+        "Contact the front desk, or your supervisor if you need assistance with a specific request or if you are unsure about the process to follow.",
+        "Leave notes in ECW General Notes for every interaction with the patient.",
+        "Finally, BE POLITE and EMPATHETIC with the patients, they are calling for help and we are here to assist them."
+      ]
+    },
+    "ThirdPartyRequests": {
+      "MedicalRecords": [
+        "Confirm the caller's name and entity (e.g., insurance, employer)",
+        "Confirm the patient's identity (DOB, name)",
+        "Confirm that we have the patient's records",
+        "If we have the records, send them via fax or email as requested",
+        "If we don't have the records, contact front desk to check if they can be obtained or send a TeleEncounter to the doctor's MA to check with the request details",
+        "Inform the caller that we will be sending them via fax or email as requested",
+        "Leave notes in ECW General Notes"
+      ],
+      "MedicalNotes": [
+        "Confirm the caller's name and entity (e.g., insurance, employer)",
+        "Confirm the patient's identity (DOB, name)",
+        "Check if the medical note is available in ECW",
+        "If available, send the note via fax or email as requested",
+        "If not available, contact front desk to check if it can be obtained or send a TeleEncounter to the doctor's MA to check with the request details",
+        "Inform the caller that we will be sending them via fax or email as requested",
+        "Leave notes in ECW General Notes"
+      ],
+      "OtherDocuments": [
+        "Confirm the caller's name and entity (e.g., insurance, employer)",
+        "Confirm the patient's identity (DOB, name)",
+        "Check if the document is available in ECW",
+        "If available, send the document via fax or email as requested",
+        "If not available, contact front desk and send a TeleEncounter to Karen Santos (Ext 102) with detail information about the request",
+        "Inform the caller that we will be sending them via fax or email as requested",
+        "Leave notes in ECW General Notes"
+      ]
+    },
+    "SickAndPain": {
+      "IdentifyingSymptoms": [
+        "Ask the patient to describe their symptoms",
+        "Identify if the patient is sick or in pain by asking the following questions:",
+        "SickVisitQuestions = ['Fever?', 'Cough?', 'Sore throat?', 'Runny nose?', 'Vomiting/diarrhea?']",
+        "PainVisitQuestions = ['Duration?', 'Nerve pain?', 'Related to accident? (If yes, redirect to ER)']",
+        "Remember that, patients that been in a car accident, work related accident, must be redirected to the ER!"
+      ],
+      "Process": [
+        "Don't book an appointment in ECW",
+        "Gather the following information:",
+        "Date, your name, patient name, DOB, sick/pain, provider, Ev eligibility, symptoms, duration, additional notes(language, etc.)",
+        "Fill out the Google Form with the patient's details and symptoms",
+        "Tell the patient that they will be contacted by one of our specialized representatives of Suffolk Primary Health within 5 to 10 minutes",
+        "Leave notes in ECW General Notes"
+      ],
+      "HospitalFollowUp": [
+        "Ask the patient how long ago they were discharged from the hospital",
+        "If it was within the last 10 days, ask them to bring their discharge paperwork to the visit",
+        "If it was more than 10 days ago, book a regular appointment in ECW /sick or /pain"
+      ],
+      "MedicalTransportation": [
+        "Gather the patient information",
+        "Confirm the address, and make sure it is correct",
+        "Send a TeleEncounter to Karen S with all the details needed",
+        "The patient has to get in contact with insurance for transportation",
+        "Ask the patient how long ago they were discharged from the hospital"
+      ]
+    },
+    "Information": {
+      "General": {
+        "locations": [
+          "Riverhead 123 Riverhead Rd, Riverhead, NY 11901",
+          "phone (631) 555-1234",
+          "fax (631) 555-1235",
+          "Hempstead 456 Hempstead Ave, Hempstead, NY 11550",
+          "phone (516) 555-5678",
+          "fax (516) 555-5679"
+        ]
+      }
+    },
+    "ECW": {
+      "GeneralTips": [
+        "Always verify the patient's identity (full name, DOB, phone number) before accessing or sharing information.",
+        "Keep the ECW platform open and logged in during your shift for quick access.",
+        "Use the search bar to quickly find patients by name or date of birth.",
+        "Document every interaction in 'General Notes' for future reference.",
+        "If unsure about a process, check the ECW help section or ask a supervisor."
+      ],
+      "AddingNewPatient": [
+        "Click the 'ADD' button to create a new profile.",
+        "Enter all demographic information accurately (name, DOB, address, phone, insurance details).",
+        "Assign the correct PCP (Simon/Ilan) as required.",
+        "Set the patient status to 'New Patient'.",
+        "Schedule the appointment as 'NP Annual Visit' (NPANNVISIT).",
+        "Remind the patient to bring their insurance card and ID to the appointment.",
+        "Leave a note in 'General Notes' summarizing the registration and appointment."
+      ],
+      "SchedulingAppointment": [
+        "Search for the patient using their name or DOB.",
+        "Confirm the reason for the appointment (regular, sick, follow-up, etc.).",
+        "Check provider and facility availability (Hempstead or Riverhead).",
+        "Select the correct visit type and duration from the Appointment Guide.",
+        "Ask all required 'Line Up' questions and confirm details with the patient.",
+        "Schedule the appointment and send an SMS confirmation if possible.",
+        "Document the appointment details in 'General Notes'."
+      ],
+      "CancellingRescheduling": [
+        "Find the appointment using the patient's profile.",
+        "Suggest rescheduling if possible.",
+        "In the visit status dropdown, select CANCEL (PHONECAN) or R/S (RESCHEDULE).",
+        "Record the reason for cancellation in 'General Notes' and in Cancellation Reason.xlsx.",
+        "Confirm the patient receives a new appointment date if rescheduled."
+      ],
+      "SendingLabs": [
+        "Go to the 'Orders' section in the patient's profile.",
+        "Select the required labs from the list.",
+        "Verify the patient's preferred pharmacy.",
+        "Send the order to the corresponding pharmacy.",
+        "Leave a note in 'General Notes' about the lab order."
+      ],
+      "SendingFax": [
+        "Go to the 'Documents' section.",
+        "Select 'Send Fax'.",
+        "Enter the recipient's fax number and attach necessary documents.",
+        "Double-check the recipient information before sending.",
+        "Leave a note in 'General Notes' about the fax sent."
+      ],
+      "ViewingInsurance": [
+        "Go to the 'Insurance' tab in the patient's profile.",
+        "Verify the active insurance information and eligibility.",
+        "Update insurance details if there are any changes.",
+        "Leave a note in 'General Notes' if any updates are made."
+      ],
+      "ViewingPrescriptions": [
+        "Go to the 'Medications' tab to review active medications and available refills.",
+        "Go to the 'Prescriptions' section to review active and past prescriptions, expiration dates, and notes.",
+        "If a refill is needed, confirm the pharmacy and send the request if allowed.",
+        "Document all actions in 'General Notes'."
+      ],
+      "SendingTeleEncounter": [
+        "Select the 'TeleEncounter' option from the patient's profile.",
+        "Choose the recipient provider.",
+        "Enter the message details and attach documents if needed.",
+        "Send the TeleEncounter and leave a note in 'General Notes'."
+      ],
+      "UploadingDocuments": [
+        "Go to the 'Documents' section.",
+        "Select 'Upload Document' and choose the document type.",
+        "Upload the file and associate it with the correct patient.",
+        "Leave a note in 'General Notes' describing the uploaded document."
+      ],
+      "CommonScenarios": {
+        "NewPatientRegistration": [
+          "Follow the 'Adding a New Patient' steps.",
+          "Check insurance eligibility before scheduling.",
+          "Remind about required documents (ID, insurance card)."
+        ],
+        "AppointmentScheduling": [
+          "Clarify the reason for the visit.",
+          "Check provider and location availability.",
+          "Confirm all details and send confirmation."
+        ],
+        "MedicationRefillRequest": [
+          "Check if the medication is on the refill list.",
+          "If yes, confirm pharmacy and send refill.",
+          "If not, check if a provider visit is needed.",
+          "Document all actions in 'General Notes'."
+        ],
+        "LabResultsOrOrders": [
+          "Check 'Orders' and 'Documents' for lab results.",
+          "If results are available, inform the patient or schedule a results visit.",
+          "If not, advise the patient on next steps."
+        ],
+        "InsuranceOrBillingQuestions": [
+          "Verify insurance in the 'Insurance' tab.",
+          "For billing, refer to the Billing Dept (Ext 186) if needed.",
+          "Document the inquiry and any advice given."
+        ],
+        "MedicalRecordsOrDocumentRequests": [
+          "Verify caller and patient identity.",
+          "Check if the document is available in 'Documents'.",
+          "Send via fax/email as requested and document the action."
+        ]
+      },
+      "NavigationShortcuts": [
+        "F2: Search for a patient quickly.",
+        "Ctrl+N: Add a new patient.",
+        "Alt+O: Open Orders section.",
+        "Alt+D: Open Documents section.",
+        "Alt+I: Open Insurance tab.",
+        "Alt+M: Open Medications tab.",
+        "Ctrl+S: Save changes."
+      ]
+    },
+    "weekly_updates": {
+      "May 21st": [
+        "May 21st Automatic Voicemail Protocol",
+        "Ask for patient's DOB and check Hub Messenger",
+        "For referral messages, check Outgoing Referrals date",
+        "If results are available, schedule Results visit",
+        "Mention possible delays when patients provide time ranges",
+        "Note time range in appointment slot Reason field"
+      ],
+      "May 22nd": [
+        "Dr. Gray leaving at 2PM (notify Sick/Pain team)",
+        "Dr. Quintanilla does not give injections (only pediatric vaccines)",
+        "Always specify test type in Reason field (BW/SUDO/SONO)",
+        "No double booking with PRE-OP, INJ or CPE"
+      ],
+      "May 23rd": [
+        "Schedule Management",
+        "Gabbi's Hempstead appointments must be marked as Hempstead facility (not SPH BH)",
+        "EMG/NCV duration reduced to 15 minutes in Riverhead",
+        "Insurance Updates",
+        "Wellcare not currently accepted - cancel appointments until further notice"
+      ],
+      "May 27th": [
+        "Telehealth Restrictions",
+        "No bookings with Dr. Gray (doesn't speak Spanish)",
+        "Results Visits Protocol",
+        "Verify results availability in Patient Docs before scheduling",
+        "Note if patient will bring outside results"
+      ],
+      "May 28th": [
+        "Provider Availability",
+        "Dr. Shivannah now only in Riverhead (telehealth Mon-Tue)",
+        "Scheduling Rules",
+        "No double booking with CPEs (yellow slots)",
+        "Dr. Quintanilla's patient load increased to 30/day (no double booking)"
+      ],
+      "June 4th": [
+        "Provider Schedules",
+        "Dr. Shivannah has afternoon meeting - limit appointments",
+        "Dr. Quintanilla in Hempstead Thu/Fri (max 30 patients)",
+        "UHC Security Update",
+        "Password resets now require recovery code",
+        "Code generation path: Profile → One HealthCare ID Page → Generate Code"
+      ],
+      "June 13th": [
+        "New Provider Hours",
+        "Dr. Gray: 6AM-6PM Mon-Thu, 6AM-2PM Fri (effective next Monday)",
+        "Minor Patient Policy",
+        "Underage patients require legal guardian present for all visits"
+      ],
+      "June 25th": [
+        "Caller ID now shows Riverhead/Hempstead origin",
+        "New SMS templates separated by location",
+        "Billing Process",
+        "Extension 186 active for billing questions (Agustina Colomer)"
+      ]
+    },
+    "StaffExtensions": [
+      { "Staff": "Call Center- Paola", "Ext": "101" },
+      { "Staff": "Fernando", "Ext": "102" },
+      { "Staff": "Call Center- Karen", "Ext": "103" },
+      { "Staff": "Front Desk- Jennifer", "Ext": "104" },
+      { "Staff": "Front Desk- Rosana", "Ext": "105" },
+      { "Staff": "Front Desk- Rina", "Ext": "106" },
+      { "Staff": "Lab", "Ext": "107" },
+      { "Staff": "Doreen - H Admin", "Ext": "109" },
+      { "Staff": "Call Center- Elvis", "Ext": "110" },
+      { "Staff": "Jessica Jaramillo / Khristy - FD H", "Ext": "122" },
+      { "Staff": "Dorian Mejia - FD H", "Ext": "123" },
+      { "Staff": "Diego Cruz", "Ext": "135" },
+      { "Staff": "Lashanta Kang", "Ext": "154" },
+      { "Staff": "Alejandra Dominguez - PC", "Ext": "155" },
+      { "Staff": "Karina Rodriguez - PC", "Ext": "156" },
+      { "Staff": "Benjamin Penn PA", "Ext": "157" },
+      { "Staff": "Yolette Georges PA", "Ext": "158" },
+      { "Staff": "Naomi Mazlin", "Ext": "159" },
+      { "Staff": "Anaica Allen", "Ext": "160" },
+      { "Staff": "Stephanie - PC", "Ext": "161" },
+      { "Staff": "Rochelle Paredes", "Ext": "163" },
+      { "Staff": "Gerardo Biasella", "Ext": "135", "Department": "QCM and Conf Team" },
+      { "Staff": "Matias Cordero", "Ext": "140", "Department": "QCM and Conf Team" },
+      { "Staff": "Rocio Funes", "Ext": "143", "Department": "QCM and Conf Team" },
+      { "Staff": "Martina Tripicchio", "Ext": "144", "Department": "QCM and Conf Team" },
+      { "Staff": "Ana Cornu", "Ext": "150", "Department": "QCM and Conf Team" },
+      { "Staff": "Anto Capurro", "Ext": "153", "Department": "QCM and Conf Team" },
+      { "Staff": "Anto Gagliano", "Ext": "126", "Department": "QCM and Conf Team" },
+      { "Staff": "Barbi Veliz", "Ext": "132", "Department": "QCM and Conf Team" },
+      { "Staff": "Joaco Herrera", "Ext": "149", "Department": "QCM and Conf Team" },
+      { "Staff": "Karen Santos", "Ext": "102", "Responsibilities": "Medicaid transport, medical records" },
+      { "Staff": "Agustina Colomer", "Ext": "186", "Responsibilities": "Billing questions/payments" }
+    ],
+    "KeyNotes": {
+      "MedicaidTransportation": "Assign to Karen Santos (Ext 102) with pick-up/drop-off addresses",
+      "HospitalFollowUps": "Patients must bring discharge paperwork (remind in notes)",
+      "UnderagePatients": "Require legal guardian present for all visits",
+      "FrontDeskExtensions": {
+        "Riverhead": "104, 105, and 107 for general front desk",
+        "Hempstead": "122 and 123 (no names assigned)"
+      }
+    },
+    "InsurancePortals": {
+      "navigation_guide": [
+        "General Steps to Check Insurance Eligibility and Coverage:",
+        "1. Log in to the appropriate insurance portal (see 'portal_name' and 'website' above).",
+        "2. Use the patient's insurance ID, name, and date of birth to search for their profile.",
+        "3. Confirm the insurance is ACTIVE. Look for eligibility status or coverage dates.",
+        "4. Check the assigned PCP (Primary Care Provider). If not Simon/Ilan, advise the patient to update PCP if required.",
+        "5. Verify if Suffolk Primary Health (or your clinic) is IN NETWORK. Look for network status or provider search tools.",
+        "6. Review the type of coverage: Look for visit types (Annual Physical, Sick Visit, Specialist, etc.) and confirm if the requested service is covered.",
+        "7. Check for co-insurance percentage (%) and copay amount ($) for the visit type. This is usually under 'Benefits', 'Coverage', or 'Patient Responsibility'.",
+        "8. Download or screenshot the eligibility/benefits summary for documentation if needed.",
+        "9. Document all findings in the patient's record and inform the patient of any issues or out-of-pocket costs."
+      ],
+      "accepted_insurances": [
+        {
+          "insurance_name": "Aetna",
+          "portal_name": "Availity",
+          "website": "https://www.availity.com",
+          "pcp_change_required": false,
+          "notes": "Meritan plans do not require PCP change"
+        },
+        {
+          "insurance_name": "Carelon",
+          "portal_name": "Availity",
+          "website": "https://www.availity.com",
+          "pcp_change_required": false,
+          "notes": ""
+        },
+        {
+          "insurance_name": "Cigna",
+          "portal_name": "Availity",
+          "website": "https://cignaforhcp.cigna.com",
+          "pcp_change_required": false,
+          "notes": "PCP change not required"
+        },
+        {
+          "insurance_name": "Empire Plan",
+          "portal_name": "Availity",
+          "website": "https://www.availity.com",
+          "pcp_change_required": false,
+          "notes": "Empire NYSHIP PPO doesn't require PCP"
+        },
+        {
+          "insurance_name": "Fidelis Medicaid",
+          "portal_name": "Fidelis",
+          "website": "https://www.fideliscare.org",
+          "pcp_change_required": false,
+          "notes": "Essential Plan doesn't require PCP"
+        },
+        {
+          "insurance_name": "HealthFirst",
+          "portal_name": "Availity",
+          "website": "https://www.availity.com",
+          "pcp_change_required": true,
+          "notes": "PCP must be Dr. Simon/Ilan"
+        },
+        {
+          "insurance_name": "Magnacare",
+          "portal_name": "Magnacare",
+          "website": "https://www.magnacare.com",
+          "pcp_change_required": false,
+          "notes": ""
+        },
+        {
+          "insurance_name": "Medicare of NY",
+          "portal_name": "Connex (NGS)",
+          "website": "https://www.ngsmedicare.com",
+          "pcp_change_required": false,
+          "notes": ""
+        },
+        {
+          "insurance_name": "Medicaid",
+          "portal_name": "ePACES",
+          "website": "https://www.emedny.org",
+          "pcp_change_required": false,
+          "notes": ""
+        },
+        {
+          "insurance_name": "United HealthCare",
+          "portal_name": "UHC",
+          "website": "https://www.uhcprovider.com",
+          "pcp_change_required": true,
+          "notes": "Excluding Commercial plans"
+        }
+      ],
+      "pending_verification": [
+        {
+          "insurance_name": "Centers Plan",
+          "portal_name": "Centers Plan",
+          "website": "Pending",
+          "status": "TBC"
+        },
+        {
+          "insurance_name": "ElderPlan",
+          "portal_name": "ElderPlan",
+          "website": "Pending",
+          "status": "TBC"
+        }
+      ],
+      "not_accepted": [
+        {
+          "insurance_name": "UHC Commercial Plan",
+          "reason": "Not accepted per clinic policy"
+        },
+        {
+          "insurance_name": "WellCare",
+          "reason": "Currently not accepting"
+        },
+        {
+          "insurance_name": "Oxford",
+          "reason": "All Oxford plans excluded"
+        },
+        {
+          "insurance_name": "MetroPlus",
+          "reason": "Not in network"
+        },
+        {
+          "insurance_name": "Tricare",
+          "reason": "Military insurance not accepted"
+        }
+      ],
+      "special_notes": {
+        "pcp_requirements": "Medicare, Medicaid, MAP and MCO PPO/POS/EPO plans do not require PCP on file",
+        "verification_process": "Always check eligibility 4+ days before appointment",
+        "self_pay_options": "Available for patients with inactive insurance"
+      },
+      "metadata": {
+        "source": "IM_INFORMATION.xlsx",
+        "last_updated": "2025-06-27",
+        "contact": "Billing Dept Ext 186 for insurance questions"
+      }
+    },
+    "AppointmentGuide": {
+      "visit_types": [
+        {
+          "visit_type": "1 Month F/U",
+          "description": "1 Month follow up",
+          "duration": "15 minutes",
+          "extra_info": "Provider ordered a F/U in 1 month, PT wants to see the Dr to discuss a treatment, PT wants a referral",
+          "rules": "Explain the reason for F/U (DM2, HTN, HLD, Hypo/parathyroid, BPH, Anxiety, Pain, Birth control, etc.)"
+        },
+        {
+          "visit_type": "2 Weeks F/U",
+          "description": "2 Weeks follow up",
+          "duration": "15 minutes",
+          "extra_info": "Provider ordered a F/U in 2 weeks, PT wants to see the Dr to discuss a treatment, PT wants a referral",
+          "rules": "Explain the reason for F/U (DM2, HTN, HLD, Hypo/parathyroid, BPH, Anxiety, Pain, Birth control, etc.)"
+        },
+        {
+          "visit_type": "3 Month F/U",
+          "description": "3 month follow up",
+          "duration": "15 minutes",
+          "extra_info": "Provider ordered a F/U in 3 months, PT wants to see the Dr to discuss a treatment, PT wants a referral",
+          "rules": "Explain the reason for F/U (DM2, HTN, HLD, Hypo/parathyroid, BPH, Anxiety, Pain, Birth control, etc.)"
+        },
+        {
+          "visit_type": "6 Month F/U",
+          "description": "6 month follow up",
+          "duration": "15 minutes",
+          "extra_info": "Provider ordered a F/U in 6 months, PT wants to see the Dr to discuss a treatment, PT wants a referral",
+          "rules": "Explain the reason for F/U (DM2, HTN, HLD, Hypo/parathyroid, BPH, Anxiety, Pain, Birth control, etc.)"
+        },
+        {
+          "visit_type": "ANN VISIT",
+          "description": "Annual visit (Complete Physical Exam - CPE)",
+          "duration": "15 minutes",
+          "extra_info": "Every 365 +1 days (patients under 18 can have one per calendar year)",
+          "rules": "NO OTHER Complaints or CONCERNS. All Annual Visits / CPE must be more the 11 Month apart, No booking if its any closer. Please advise pt to wear loose clothing (no corsets or one pieces) and no body oils nor lotions because it will affect the EKG process and results."
+        },
+        {
+          "visit_type": "AWC",
+          "description": "Medicare Annual Well visit care",
+          "duration": "30 minutes",
+          "extra_info": "CPE for PTs over 65. Every 365 +1 days",
+          "rules": "NO OTHER Complaints or CONCERNS"
+        },
+        {
+          "visit_type": "BP check",
+          "description": "Blood Pressure Check",
+          "duration": "15 minutes",
+          "extra_info": "",
+          "rules": ""
+        },
+        {
+          "visit_type": "BW",
+          "description": "Bloodwork",
+          "duration": "Bloodwork",
+          "extra_info": "Some blood works need to be fasting, others don't. THIS APPT IS BOOKED UNDER THE BLOOD WORK COLUMN",
+          "rules": "Make sure the provider put the lab order prior the visit - if they ask for a random BW APPT, we need to tell them that we will book them a visit with the provider - CANNOT HAVE A VISIT WITH PROVIDER THE SAME DAY. They can take their meds"
+        },
+        {
+          "visit_type": "DOT Phys",
+          "description": "DOT physical exam for drivers",
+          "duration": "30 minutes",
+          "extra_info": "how often can it be done?",
+          "rules": "ALL NON-MEDICAL QUESTIONS TO BE COMPLETED BY INDIVIDUAL CONFIRMING THE APT Blue Sections only - PAPER WORK MUST BE COMPLETD BEFORE THE APPT - NO OTHER Complaints or CONCERNS"
+        },
+        {
+          "visit_type": "EMP CPE",
+          "description": "Employment Physical exam",
+          "duration": "30 minutes",
+          "extra_info": "how often can it be done?",
+          "rules": "Must advise patient to have all necessary documentation that has to be completed by office as well as to ensure all labs drug screen and titers are ordered and all paperwork have to be done prior to the appointment PAPER WORK MUST BE COMPLETD BEFORE THE APPT - NO OTHER Complaints or CONCERNS"
+        },
+        {
+          "visit_type": "FLU VAX",
+          "description": "Influenza Vaccination",
+          "duration": "15 minutes",
+          "extra_info": "Only available from October to March",
+          "rules": "CANNOT have FLU SYMPTOMS or take ANTIBIOTICS"
+        },
+        {
+          "visit_type": "Glucose",
+          "description": "Glucose check up",
+          "duration": "15 minutes",
+          "extra_info": "",
+          "rules": ""
+        },
+        {
+          "visit_type": "Holter F/U",
+          "description": "Holter monitor Follow Up Appt",
+          "duration": "15 minutes",
+          "extra_info": "Device for cardiac monitoring",
+          "rules": ""
+        },
+        {
+          "visit_type": "Holter NP",
+          "description": "Holter monitor New pt Appt",
+          "duration": "15 minutes",
+          "extra_info": "Device for cardiac monitoring",
+          "rules": ""
+        },
+        {
+          "visit_type": "HOSP F/U",
+          "description": "Hospital Follow Up",
+          "duration": "15 minutes",
+          "extra_info": "",
+          "rules": "MUST HAVE ALL DISCHARGE DOCUMENTATION ON ARRIVAL - NO OTHER Complaints or CONCERNS - Specify the reason for hospitalization. Appt must have been no more than 10 days after discharging pt."
+        },
+        {
+          "visit_type": "Implamterm",
+          "description": "Implant Removal",
+          "duration": "30 minutes",
+          "extra_info": "",
+          "rules": "Only Dr Shivanahh and Dr Gray"
+        },
+        {
+          "visit_type": "INJ",
+          "description": "Injection (Not Flu Vax)",
+          "duration": "15 minutes",
+          "extra_info": "",
+          "rules": "DON'T BOOK 1 INJECTION APPT AFTER THE NEXT 1, PUT 1 OTHER VISIT IN MIDDLE - on the main Schedule - NO OTHER COMPLAINTS or CONCERNS. Specify Shoulder, Back, Wrist, Knee etc."
+        },
+        {
+          "visit_type": "Med Refill",
+          "description": "Medication refill",
+          "duration": "15 minutes",
+          "extra_info": "Some medications need to have a provider visit before sending a new refill, it will depend on the amount of refills provider gave in prescription",
+          "rules": "Specify the medication patient needs refills on"
+        },
+        {
+          "visit_type": "MED F/U",
+          "description": "Medication Follow Up with DR.",
+          "duration": "15 minutes",
+          "extra_info": "",
+          "rules": ""
+        },
+        {
+          "visit_type": "NP Annual",
+          "description": "New patient annual CPE",
+          "duration": "20 minutes",
+          "extra_info": "only first CPE at the clinic",
+          "rules": "New PT Need to come 15 Minutes Early, bring insurance card and ID - NO OTHER Complaints or CONCERNS. All Annual Visits / CPE must be more the 11 Month apart, No booking if its any closer. please advise pt to wear loose clothing (no corsets or one pieces) and no body oils nor lotions because it will affect the EKG process and results."
+        },
+        {
+          "visit_type": "NP AWV",
+          "description": "New patient annual CPE 65+",
+          "duration": "30 minutes",
+          "extra_info": "only first CPE at the clinic",
+          "rules": "New PT Need to come 15 Minutes Early, bring insurance card and ID - NO OTHER Complaints or CONCERNS. All Annual Visits / CPE must be more the 11 Month apart, No booking if its any closer. Please advise pt to wear loose clothing (no corsets or one pieces) and no body oils nor lotions because it will affect the EKG process and results."
+        },
+        {
+          "visit_type": "NP PAIN",
+          "description": "New patient + pain visit",
+          "duration": "20 minutes",
+          "extra_info": "Pain visit for new patients",
+          "rules": "ADD PT'S INFO TO SICK PAIN VISITS FORM.xlsx If the patient is too sick/2 days temperature - should go to the hospital. IF PAIN IS RELATED TO A CAR OR WORK ACCIDENT, WE CANNOT SEE THEM"
+        },
+        {
+          "visit_type": "NP SICK",
+          "description": "New patient + sick visit",
+          "duration": "20 minutes",
+          "extra_info": "Sick visit for new patients",
+          "rules": "ADD PT'S INFO TO SICK PAIN VISITS FORM.xlsx If the patient is too sick/2 days temperature - should go to the hospital."
+        },
+        {
+          "visit_type": "PAIN VISIT",
+          "description": "Regular pain visit",
+          "duration": "15 minutes",
+          "extra_info": "Visit for pain like symptoms",
+          "rules": "ADD PT'S INFO TO SICK PAIN VISITS FORM.xlsx If the patient is too sick/2 days temperature - should go to the hospital. IF PAIN IS RELATED TO A CAR OR WORK ACCIDENT, WE CANNOT SEE THEM"
+        },
+        {
+          "visit_type": "PAP SMEAR",
+          "description": "Pap test for cervical screening",
+          "duration": "20 minutes",
+          "extra_info": "Needs annual within the last year - Only done by Shivannah, Gabrielle, Salcedo",
+          "rules": "Must advise that no other medical interventions will be provided during the day of the procedure, in the event that a patient should require refills this task may be easily performed by the triage MA. PATIENT CANNOT BE MENSTRUATING OR HAVE INTERCOURSE WITHIN 24 HOURS"
+        },
+        {
+          "visit_type": "NP Pt PAP SMEAR",
+          "description": "Pap test for cervical screening",
+          "duration": "15 minutes",
+          "extra_info": "Only done by Shivannah and Alex",
+          "rules": "PCP NEEDS TO BE SIMON OR ILAN -NO MENSTRUATING OR HAVE SEX WITHIN 24 HOURS"
+        },
+        {
+          "visit_type": "Pre-OP",
+          "description": "Medical clearance",
+          "duration": "15 minutes",
+          "extra_info": "",
+          "rules": "Must have all PreOP Documents - NO OTHER Complaints or CONCERNS. Specify the surgery in reason"
+        },
+        {
+          "visit_type": "PRP",
+          "description": "Platelet Rich Plasma",
+          "duration": "20 minutes",
+          "extra_info": "ONLY GRAY PERFORMS THIS",
+          "rules": "Patient needs a CPE in the last year. Cannot be New Patient. Only Self Pay. Price: $150. Insurance does not cover this"
+        },
+        {
+          "visit_type": "Results",
+          "description": "Results for any procedure",
+          "duration": "15 minutes",
+          "extra_info": "Patient can bring tests done in other places - need to check - Labs, x-rays, SONOs, MRIs etc. CAN BE FOUND IN LABS/DI/PATIENT DOCS",
+          "rules": "(should be specified in order to ensure that the office has the results as patients come in and sometimes we do not have the results in-house and this now holds up a consult room for 10-20 min) - NO OTHER Complaints or CONCERNS."
+        },
+        {
+          "visit_type": "Same Pain",
+          "description": "Same day pain visit",
+          "duration": "15 minutes",
+          "extra_info": "Visit for pain like symptoms scheduled on the same day",
+          "rules": "ADD PT'S INFO TO SICK PAIN VISITS FORM.xlsx If the patient is too sick/2 days temperature - should go to the hospital. IF PAIN IS RELATED TO A CAR OR WORK ACCIDENT, WE CANNOT SEE THEM"
+        },
+        {
+          "visit_type": "Same Sick",
+          "description": "Same day sick visit",
+          "duration": "15 minutes",
+          "extra_info": "Visit for sick symptoms scheduled on the same day",
+          "rules": "ADD PT'S INFO TO SICK PAIN VISITS FORM.xlsx If the patient is too sick/2 days temperature - should go to the hospital."
+        },
+        {
+          "visit_type": "School CPE",
+          "description": "Physical Exam for School",
+          "duration": "20 minutes",
+          "extra_info": "Does it count as Ann visit? Or can have an ann done and then this?",
+          "rules": "Must advise patient to have all necessary documentation that has to be completed by office as well as to ensure all paperwork have to be done prior to the appointment PAPER WORK MUST BE COMPLETED BEFORE THE APPT - NO OTHER Complaints or CONCERNS"
+        },
+        {
+          "visit_type": "Sick Visit",
+          "description": "Regular Sick Visit",
+          "duration": "15 minutes",
+          "extra_info": "",
+          "rules": "ADD PT'S INFO TO SICK PAIN VISITS FORM.xlsx If the patient is too sick/2 days temperature - should go to the hospital."
+        },
+        {
+          "visit_type": "SkinTagRem",
+          "description": "Skin Tag Removal",
+          "duration": "15 minutes",
+          "extra_info": "",
+          "rules": "Specify in reason Cysts, skin tags, warts, biopsies etc. DON'T BOOK 1 PROCEDURE APPT AFTER THE NEXT 1, PUT 1 OTHER VISIT IN MIDDLE - on the main Schedule"
+        },
+        {
+          "visit_type": "Suture Rem",
+          "description": "Suture Removal",
+          "duration": "20 minutes",
+          "extra_info": "",
+          "rules": "DON'T BOOK 1 PROCEDURE APPT AFTER THE NEXT 1, PUT 1 OTHER VISIT IN MIDDLE - on the main Schedule"
+        },
+        {
+          "visit_type": "Tele F/U",
+          "description": "Telehealth Follow Up",
+          "duration": "15 minutes",
+          "extra_info": "Call FD to confirm if it's okay to schedule Telehealth with provider",
+          "rules": "Se pueden agendar pacientes mayores de 60 y 65 años, como en casos de resultados. NO se deben agendar seguimientos de medicamentos (meds f/u), ya que es necesario"
+        },
+        {
+          "visit_type": "Tele NP",
+          "description": "Telehealth New Patient",
+          "duration": "30 minutes",
+          "extra_info": "Call FD to confirm if it's okay to schedule Telehealth with provider",
+          "rules": "Se pueden agendar pacientes mayores de 60 y 65 años, como en casos de resultados. NO se deben agendar seguimientos de medicamentos (meds f/u), ya que es necesario"
+        },
+        {
+          "visit_type": "Tele SP",
+          "description": "Telehealth SelfPay",
+          "duration": "15 minutes",
+          "extra_info": "Call FD to confirm if it's okay to schedule Telehealth with provider",
+          "rules": "Se pueden agendar pacientes mayores de 60 y 65 años, como en casos de resultados. NO se deben agendar seguimientos de medicamentos (meds f/u), ya que es necesario"
+        },
+        {
+          "visit_type": "Vaccines",
+          "description": "Vaccination appt",
+          "duration": "15 minutes",
+          "extra_info": "",
+          "rules": "Specify in reason the kind of vaccine. Must confirm that schedule vaccine is in stock as there have been a multitude of cancellations because said vaccine was unavailable - NO OTHER Complaints or CONCERNS"
+        },
+        {
+          "visit_type": "IV",
+          "description": "IV Therapy",
+          "duration": "45 minutes",
+          "extra_info": "THIS APPT HAS TO BE BOOKED UNDER THE IV COLUMN",
+          "rules": "NO OTHER Complaints or CONCERNS. Make sure the provider put the order prior the visit - if they ask for a random APPT, we need to tell them that we will book them a visit with the provider - CANNOT HAVE A VISIT WITH PROVIDER THE SAME DAY"
+        },
+        {
+          "visit_type": "Iron Inf",
+          "description": "Iron IV Infusion",
+          "duration": "45 minutes",
+          "extra_info": "THIS APPT HAS TO BE BOOKED UNDER THE IV COLUMN",
+          "rules": "NO OTHER Complaints or CONCERNS. Make sure the provider put the order prior the visit - if they ask for a random APPT, we need to tell them that we will book them a visit with the provider - CANNOT HAVE A VISIT WITH PROVIDER THE SAME DAY"
+        },
+        {
+          "visit_type": "DIA EYE EX",
+          "description": "Diabetic Eye Exam",
+          "duration": "15 minutes",
+          "extra_info": "THIS APPT HAS TO BE BOOKED UNDER THE DIABETIC EYE EXAM COLUMN",
+          "rules": "NO OTHER Complaints or CONCERNS. Make sure the provider put the order prior the visit - if they ask for a random APPT, we need to tell them that we will book them a visit with the provider - CANNOT HAVE A VISIT WITH PROVIDER THE SAME DAY"
+        },
+        {
+          "visit_type": "EMG-NCVLOW",
+          "description": "EMG-NCV Lower Extremity",
+          "duration": "15 minutes",
+          "extra_info": "A nerves study for patients with diabetes. THIS APPT HAS TO BE BOOKED UNDER THE EMG COLUMN",
+          "rules": "NO OTHER Complaints or CONCERNS. Make sure the provider put the order prior the visit - if they ask for a random APPT, we need to tell them that we will book them a visit with the provider PREPARATION: No lotion, no perfume, no moisturizer, no coffee, comfortable clothes.- CANNOT HAVE A VISIT WITH PROVIDER THE SAME DAY"
+        },
+        {
+          "visit_type": "EMG-NCVUPP",
+          "description": "EMG-NCV Upper Extremity",
+          "duration": "15 minutes",
+          "extra_info": "A nerves study for patients with diabetes. THIS APPT HAS TO BE BOOKED UNDER THE EMG COLUMN",
+          "rules": "NO OTHER Complaints or CONCERNS. Make sure the provider put the order prior the visit - if they ask for a random APPT, we need to tell them that we will book them a visit with the provider PREPARATION: No lotion, no perfume, no moisturizers, no coffee, comfortable clothes- CANNOT HAVE A VISIT WITH PROVIDER THE SAME DAY."
+        },
+        {
+          "visit_type": "TCD",
+          "description": "TCD (Transcranial Doppler Diagnoses)",
+          "duration": "15 minutes",
+          "extra_info": "",
+          "rules": "NO OTHER Complaints or CONCERNS. Make sure the provider put the order prior the visit - if they ask for a random APPT, we need to tell them that we will book them a visit with the provider - CANNOT HAVE A VISIT WITH PROVIDER THE SAME DAY"
+        },
+        {
+          "visit_type": "SUDO/ABI",
+          "description": "SUDO/ABI",
+          "duration": "30 minutes",
+          "extra_info": "Study done for patients with diabetes",
+          "rules": "NO OTHER Complaints or CONCERNS. Make sure the provider put the order prior the visit - if they ask for a random APPT, we need to tell them that we will book them a visit with the provider PREPARATIONS: Avoid lotions, moisturizers. Comfortable clothes.- CANNOT HAVE A VISIT WITH PROVIDER THE SAME DAY"
+        },
+        {
+          "visit_type": "POD F/U",
+          "description": "POD F/U (Podiatry Follow Up)",
+          "duration": "15 minutes",
+          "extra_info": "Done by Herbert, Scott",
+          "rules": "Book under Herbert Scott column"
+        },
+        {
+          "visit_type": "POD NP",
+          "description": "POD NP (Podiatry New Patient)",
+          "duration": "15 minutes",
+          "extra_info": "Done by Herbert, Scott",
+          "rules": "Book under Herbert Scott column"
+        }
+      ],
+      "sonograms": [
+        {
+          "type": "ABD",
+          "description": "Abdominal",
+          "duration": "20 minutes",
+          "preparation": "Nothing to eat 6 hours prior to exam, water only and should be kept to a minimum"
+        },
+        {
+          "type": "AOR",
+          "description": "Aorta",
+          "duration": "15 minutes",
+          "preparation": "Nothing to eat 6 hours prior to exam, water only and should be kept to a minimum"
+        },
+        {
+          "type": "ART LE",
+          "description": "Arterial Lower Extremity",
+          "duration": "20 minutes",
+          "preparation": ""
+        },
+        {
+          "type": "ART UE",
+          "description": "Arterial Upper Extremity",
+          "duration": "20 minutes",
+          "preparation": ""
+        },
+        {
+          "type": "BLADDER",
+          "description": "Bladder",
+          "duration": "20 minutes",
+          "preparation": ""
+        },
+        {
+          "type": "CARO",
+          "description": "Carotid",
+          "duration": "20 minutes",
+          "preparation": "No preparation necessary"
+        },
+        {
+          "type": "ECHO",
+          "description": "Echocardiogram",
+          "duration": "20 minutes",
+          "preparation": "No preparation necessary",
+          "notes": "Some patients need to get approval from insurance to get Echo done, if it's not approved, PT has to pay for the study. (It's specified in the appt by FD after search)"
+        },
+        {
+          "type": "PEL",
+          "description": "Pelvic",
+          "duration": "20 minutes",
+          "preparation": "Start drinking 32 ounces of water 1 hour prior to exam. Drink for 30 minutes. Do not urinate after drinking.",
+          "notes": "(includes Prostate sono)"
+        },
+        {
+          "type": "RENAL",
+          "description": "Renal",
+          "duration": "20 minutes",
+          "preparation": "RENAL Sono patients should drink 32oz of water 30 mins before appointment and hold it until the exam is done"
+        },
+        {
+          "type": "RENAL ART",
+          "description": "Renal Artery",
+          "duration": "20 minutes",
+          "preparation": "Nothing to eat 6 hours prior to exam, water only and should be kept to a minimum"
+        },
+        {
+          "type": "THYR",
+          "description": "Thyroid",
+          "duration": "15 minutes",
+          "preparation": "No preparation necessary"
+        },
+        {
+          "type": "VENOUS LE",
+          "description": "Venous Lower Extremity",
+          "duration": "15 minutes",
+          "preparation": "No preparation necessary"
+        },
+        {
+          "type": "VENOUS UE",
+          "description": "Venous Upper Extremity",
+          "duration": "15 minutes",
+          "preparation": "No preparation necessary"
+        },
+        {
+          "type": "SX REMOVAL",
+          "description": "only vaginal",
+          "duration": "30 minutes",
+          "rules": "NO NP, need to have a pap and a cpe up to date (every one year)"
+        }
+      ],
+      "visit_statuses": [
+        {
+          "status": "CANCSAMEDA",
+          "description": "Cancelled Same Day",
+          "notes": "PT calls same day of the appt to cancel it (Must fill out form with reason of cancellation)",
+          "form": "Cancellation Reason.xlsx"
+        },
+        {
+          "status": "CONFPHONE",
+          "description": "Confirmed by Phone",
+          "notes": "Appt was confirmed over the phone",
+          "form": ""
+        },
+        {
+          "status": "CONFSMS",
+          "description": "Confirmed by SMS",
+          "notes": "Appt was confirmed by SMS",
+          "form": ""
+        },
+        {
+          "status": "FAILEDMSG",
+          "description": "Unable to reach patient",
+          "notes": "We called but PT didn't answer and there's no mail box",
+          "form": ""
+        },
+        {
+          "status": "PCP Issue",
+          "description": "PCP Needs To Be Changed",
+          "notes": "PT has a different PCP in the insurance portal and needs to change it",
+          "form": ""
+        },
+        {
+          "status": "PEN",
+          "description": "Pending",
+          "notes": "Appt hasn't been confirmed yet",
+          "form": ""
+        },
+        {
+          "status": "VOICEMSG",
+          "description": "Voicemail",
+          "notes": "We left a voice message",
+          "form": ""
+        },
+        {
+          "status": "CANC",
+          "description": "Cancelled",
+          "notes": "Appt was cancelled by the PT (Must fill out form with reason of cancellation)",
+          "form": "Cancellation Reason.xlsx"
+        },
+        {
+          "status": "CANCBYOFF",
+          "description": "Cancelled by Office",
+          "notes": "Appt was cancelled by the office (Must fill out form with reason of cancellation)",
+          "form": "Cancellation Reason.xlsx"
+        },
+        {
+          "status": "CANCPHONE",
+          "description": "Cancelled by Phone",
+          "notes": "Appt was cancelled over the phone (Must fill out form with reason of cancellation)",
+          "form": "Cancellation Reason.xlsx"
+        },
+        {
+          "status": "CANCSMS",
+          "description": "Cancelled by SMS",
+          "notes": "Appt was cancelled by SMS (Must fill out form with reason of cancellation)",
+          "form": "Cancellation Reason.xlsx"
+        },
+        {
+          "status": "R/S",
+          "description": "Rescheduled",
+          "notes": "Appt was rescheduled by PT",
+          "form": ""
+        },
+        {
+          "status": "R/SBYOFF",
+          "description": "Rescheduled by Office",
+          "notes": "Appt was rescheduled by the office",
+          "form": ""
+        },
+        {
+          "status": "R/SSAMEDAY",
+          "description": "Rescheduled Same Day",
+          "notes": "PT calls to reschedule the same day of the appt",
+          "form": ""
+        },
+        {
+          "status": "RESULT/IS",
+          "description": "Results are not Ready",
+          "notes": "Results are not ready for the day of the appt (for Results visit type)",
+          "form": ""
+        },
+        {
+          "status": "RSPHONE",
+          "description": "Rescheduled by Phone",
+          "notes": "PT rescheduled appt over the phone",
+          "form": ""
+        }
+      ]
+    },
+    "Complaints": {
+      "HowToSubmit": [
+        "1. Fill out the Following complaint form: https://forms.office.com/r/3b0a1c6d8f",
+        "2. Gather the patient's information including name, date of birth, and contact details",
+        "3. Provide a detailed description of the complaint, including dates, times, and any relevant interactions",
+        "4. Submit the form.",
+        "5. It is important to empathize with the patient and assure them that their complaint will be taken seriously and addressed promptly."
+      ]
+    },
+    "GeneralHIPAAInformation": {
+      "Intro": [
+        "HIPAA (Health Insurance Portability and Accountability Act) is a federal law that protects patient privacy and ensures their health information is kept secure.",
+        "As a call center agent, you play a key role in protecting our patients' sensitive information every day."
+      ],
+      "WhatIsProtectedHealthInformation": [
+        "Protected Health Information (PHI) includes any information that can identify a patient and relates to their health, care, or payment for care.",
+        "Examples: Name, date of birth, address, phone number, insurance details, medical record number, diagnosis, treatment, and appointment information."
+      ],
+      "YourHIPAAResponsibilities": [
+        "Always verify the caller's identity before sharing any patient information (ask for full name, date of birth, and another identifier if needed).",
+        "Never discuss patient information with anyone who is not authorized (including family, friends, or other staff without a need to know).",
+        "Do not leave PHI visible on your desk, computer screen, or in public areas.",
+        "Log out of systems (like ECW) when stepping away from your workstation.",
+        "If you receive a request for records, always follow the clinic's verification and release process."
+      ],
+      "WhatToDoIfYouSuspectABreach": [
+        "If you think PHI has been shared inappropriately (even by accident), report it immediately to your supervisor or the Privacy Officer.",
+        "Do not try to handle it alone—timely reporting helps protect patients and the clinic."
+      ],
+      "EmpathyAndHIPAA": [
+        "You can be warm and helpful while still protecting privacy. For example: 'I'd love to help, but I need to verify your identity first to keep your information safe.'",
+        "If a caller is frustrated by privacy questions, reassure them: 'We ask these questions to protect your privacy and make sure only you can access your health information.'"
+      ],
+      "QuickHIPAAChecklist": [
+        "✅ Always verify identity before sharing information.",
+        "✅ Only access or share the minimum information needed to do your job.",
+        "✅ Never discuss patient information in public or with unauthorized people.",
+        "✅ Report any privacy concerns right away."
+      ],
+      "Resources": [
+        "If you have questions about HIPAA or privacy, contact your supervisor or the Privacy Officer.",
+        "Annual HIPAA training is required—ask if you need a refresher!"
+      ]
+    }
+  }
+}
+
+
